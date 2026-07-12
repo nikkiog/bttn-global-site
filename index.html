@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BTTN Global — independent software company</title>
+<meta name="description" content="BTTN Global builds SaaS products from the ground up — tools that free teams from busywork and give small companies the leverage of large ones.">
+<style>
+  :root{
+    --paper:#efece6;
+    --ink:#141414;
+    --muted:#6a6a66;
+    --muted2:#4a4a46;
+    --hair:#d7d3ca;
+    --accent:#2f5fd0;
+  }
+  html{scroll-behavior:smooth}
+  html,body{margin:0;padding:0}
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  a:hover{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+  ::selection{background:var(--accent);color:#fff}
+
+  .page{min-height:100vh;padding:0 clamp(20px,5vw,64px)}
+  .shell{max-width:1080px;margin:0 auto}
+
+  /* top bar */
+  .topbar{
+    max-width:1080px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 0 26px;
+    font-size:11px;letter-spacing:0.14em;font-weight:500;text-transform:uppercase;
+  }
+  .logo{letter-spacing:0.28em;font-weight:600}
+  .logo .slash{color:var(--accent)}
+  .topnav{display:flex;gap:clamp(20px,4vw,44px)}
+  .topnav .contact{color:var(--accent)}
+
+  /* hero */
+  .hero{padding:clamp(60px,11vw,150px) 0 0}
+  .hero h1{
+    margin:0;font-size:clamp(72px,15vw,224px);line-height:0.86;
+    font-weight:600;letter-spacing:-0.035em;
+  }
+  .rule{height:1px;background:var(--ink);margin:14px 0 12px}
+  .hero .sub{margin:0;font-size:clamp(20px,3vw,34px);font-weight:500;letter-spacing:-0.01em}
+  .hero .est{
+    margin:20px 0 0;font-size:11px;line-height:1.6;letter-spacing:0.02em;
+    color:var(--muted);max-width:280px;
+  }
+
+  /* section labels */
+  .label{
+    font-size:11px;letter-spacing:0.16em;text-transform:uppercase;
+    font-weight:600;color:var(--muted);
+  }
+
+  /* mission */
+  .mission{
+    display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;
+    padding:clamp(90px,16vw,220px) 0 0;
+  }
+  .mission p{
+    margin:0;max-width:560px;text-align:right;
+    font-size:clamp(15px,1.8vw,19px);line-height:1.75;letter-spacing:-0.005em;
+  }
+
+  /* process */
+  .process{padding:clamp(100px,17vw,220px) 0 clamp(90px,15vw,190px)}
+  .process .label{margin-bottom:clamp(44px,7vw,84px)}
+  .proc{display:grid;column-gap:clamp(28px,4vw,56px);row-gap:56px;grid-template-columns:1fr}
+  .proc-step{position:relative;padding-bottom:8px}
+  .proc-num{
+    font-size:11px;font-weight:600;color:var(--accent);
+    font-variant-numeric:tabular-nums;letter-spacing:0.04em;
+  }
+  .proc-step .rule{margin:14px 0 22px}
+  .proc-arrow{
+    display:none;position:absolute;top:20px;
+    font-size:22px;line-height:1;color:var(--accent);
+  }
+  .proc-title{font-size:clamp(19px,2vw,25px);font-weight:600;letter-spacing:-0.015em;line-height:1.15}
+  .proc-desc{margin-top:14px;font-size:14px;line-height:1.65;color:var(--muted2)}
+  @media(min-width:560px){
+    .proc{grid-template-columns:repeat(2,1fr)}
+    .proc-arrow{display:block;right:calc(-1 * clamp(28px,4vw,56px) / 2 - 5px)}
+    .proc-step:nth-child(2n) .proc-arrow{display:none}
+  }
+  @media(min-width:900px){
+    .proc{grid-template-columns:repeat(4,1fr)}
+    .proc-step:nth-child(2n) .proc-arrow{display:block}
+    .proc-step:nth-child(4n) .proc-arrow{display:none}
+  }
+  .proc-step:last-child .proc-arrow{display:none}
+
+  /* products */
+  .list-head{
+    display:flex;align-items:baseline;gap:12px;
+    border-top:1px solid var(--ink);padding-top:14px;
+  }
+  .list-head h2{margin:0;font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-0.02em}
+  .list-head .count{font-size:12px;color:var(--muted);font-weight:500}
+  .product{
+    display:grid;grid-template-columns:64px 1fr;gap:clamp(16px,4vw,56px);
+    padding:26px 0;border-top:1px solid var(--hair);
+  }
+  .product .year{
+    font-size:11px;letter-spacing:0.04em;color:var(--muted);
+    padding-top:5px;font-variant-numeric:tabular-nums;
+  }
+  .product .body{
+    display:flex;flex-wrap:wrap;gap:10px 40px;
+    justify-content:space-between;align-items:baseline;
+  }
+  .product .info{max-width:520px}
+  .product .name-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .product .name{font-size:clamp(19px,2.2vw,25px);font-weight:600;letter-spacing:-0.015em}
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+    font-weight:600;color:var(--muted2);
+  }
+  .dot{width:6px;height:6px;border-radius:50%}
+  .dot-build{background:#8a8a86}
+  .dot-beta{background:#d98a1f}
+  .dot-live{background:#1f8a4d}
+  .product .desc{margin-top:6px;font-size:14px;line-height:1.6;color:var(--muted2)}
+  .visit{
+    font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+    font-weight:600;color:var(--accent);white-space:nowrap;
+  }
+
+  /* updates */
+  .updates{padding-top:clamp(70px,11vw,130px)}
+  .updates h2{
+    margin:0;font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-0.02em;
+    border-top:1px solid var(--ink);padding-top:14px;
+  }
+  .update{
+    display:grid;grid-template-columns:56px 78px 1fr;gap:clamp(12px,3vw,32px);
+    padding:26px 0;border-top:1px solid var(--hair);align-items:start;
+  }
+  .update .tag{
+    font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+    font-weight:700;color:var(--accent);
+  }
+  .update .date{
+    font-size:11px;color:var(--muted);
+    font-variant-numeric:tabular-nums;padding-top:1px;
+  }
+  .update .text-wrap{max-width:640px}
+  .update .text{font-size:15px;line-height:1.6;letter-spacing:-0.005em}
+  .update .details{
+    display:inline-block;margin-top:8px;
+    font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+    font-weight:600;color:var(--accent);
+  }
+
+  /* footer */
+  footer{padding:clamp(80px,13vw,160px) 0 40px;position:relative}
+  .to-top{
+    position:absolute;top:clamp(80px,13vw,160px);right:0;
+    font-size:20px;color:var(--muted);
+  }
+  .footer-rows{
+    display:flex;flex-direction:column;gap:30px;
+    border-top:1px solid var(--ink);padding-top:44px;
+  }
+  .footer-row{display:grid;grid-template-columns:40px 1fr;gap:clamp(20px,6vw,80px)}
+  .footer-key{font-size:13px;font-weight:600}
+  .footer-val{font-size:15px;line-height:1.55}
+  .footer-row.links .footer-key{line-height:1.8}
+  .footer-row.links .footer-val{line-height:1.8}
+  .footer-val .linkedin{color:var(--accent)}
+  .copyright{margin-top:44px;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- top bar -->
+  <div class="topbar">
+    <a class="logo" href="#top">bttn global&nbsp;<span class="slash">/</span></a>
+    <nav class="topnav">
+      <a href="#menu">Updates</a>
+      <a class="contact" href="#footer">Contact</a>
+    </nav>
+  </div>
+
+  <div id="top" class="shell">
+
+    <!-- hero -->
+    <section class="hero">
+      <h1>build</h1>
+      <div class="rule"></div>
+      <p class="sub">software that outlasts the trend.</p>
+      <p class="est">BTTN Global is an independent software company. (EST. 2024)</p>
+    </section>
+
+    <!-- mission -->
+    <section class="mission">
+      <div class="label">Mission</div>
+      <p>BTTN Global builds SaaS products from the ground up. We make tools that free teams from busywork and give small companies the leverage of large ones. We ship quietly, iterate in the open, and measure success by the problems our software makes disappear.</p>
+    </section>
+
+    <!-- process -->
+    <section class="process">
+      <div class="label">How we work</div>
+      <div class="proc">
+        <div class="proc-step">
+          <div class="proc-num">01</div>
+          <div class="rule"></div>
+          <div class="proc-arrow">→</div>
+          <div class="proc-title">Spot the gap</div>
+          <div class="proc-desc">We study what is already on the market and either improve it or dream up new tools where we see gaps.</div>
+        </div>
+        <div class="proc-step">
+          <div class="proc-num">02</div>
+          <div class="rule"></div>
+          <div class="proc-arrow">→</div>
+          <div class="proc-title">Ship fast</div>
+          <div class="proc-desc">We bring products to market as quickly as possible, getting something real into people’s hands early.</div>
+        </div>
+        <div class="proc-step">
+          <div class="proc-num">03</div>
+          <div class="rule"></div>
+          <div class="proc-arrow">→</div>
+          <div class="proc-title">Build in beta</div>
+          <div class="proc-desc">We work closely with customers and community through beta to shape the product together.</div>
+        </div>
+        <div class="proc-step">
+          <div class="proc-num">04</div>
+          <div class="rule"></div>
+          <div class="proc-title">Keep improving</div>
+          <div class="proc-desc">We improve consistently and deliberately, driven by ongoing feedback from real usage.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- products -->
+    <section>
+      <div class="list-head">
+        <h2>Products</h2>
+        <span class="count">(3)</span>
+      </div>
+      <div class="product">
+        <div class="year">2026</div>
+        <div class="body">
+          <div class="info">
+            <div class="name-row">
+              <div class="name">Salmon App</div>
+              <span class="badge"><span class="dot dot-beta"></span>Beta</span>
+            </div>
+            <div class="desc">Turns your meetings and notes into tracked work and shows managers exactly what to move today, across every project.</div>
+          </div>
+          <a class="visit" href="https://project-salmon.com" target="_blank" rel="noopener">Visit ↗</a>
+        </div>
+      </div>
+      <div class="product">
+        <div class="year">2026</div>
+        <div class="body">
+          <div class="info">
+            <div class="name-row">
+              <div class="name">Product Two</div>
+              <span class="badge"><span class="dot dot-beta"></span>Beta</span>
+            </div>
+            <div class="desc">Placeholder description of the second product. Swap in the real name and one-liner.</div>
+          </div>
+          <a class="visit" href="#">Visit ↗</a>
+        </div>
+      </div>
+      <div class="product">
+        <div class="year">2026</div>
+        <div class="body">
+          <div class="info">
+            <div class="name-row">
+              <div class="name">Product Three</div>
+              <span class="badge"><span class="dot dot-build"></span>Build</span>
+            </div>
+            <div class="desc">Placeholder description of the newest product in the portfolio.</div>
+          </div>
+          <a class="visit" href="#">Visit ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- updates -->
+    <section id="menu" class="updates">
+      <h2>Updates</h2>
+      <div class="update">
+        <div class="tag">New</div>
+        <div class="date">2026.07</div>
+        <div class="text-wrap">
+          <div class="text">Product Three shipped a redesigned dashboard with faster load times and saved views.</div>
+          <a class="details" href="#">See details ↗</a>
+        </div>
+      </div>
+      <div class="update">
+        <div class="tag"></div>
+        <div class="date">2026.05</div>
+        <div class="text-wrap">
+          <div class="text">Product One reached 10,000 active workspaces. Thank you to everyone building with us.</div>
+          <a class="details" href="#">See details ↗</a>
+        </div>
+      </div>
+      <div class="update">
+        <div class="tag"></div>
+        <div class="date">2026.02</div>
+        <div class="text-wrap">
+          <div class="text">Public API is now available in beta for Product Two. Docs and keys in your account.</div>
+          <a class="details" href="#">See details ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer id="footer">
+      <a class="to-top" href="#top">↑</a>
+      <div class="footer-rows">
+        <div class="footer-row">
+          <div class="footer-key">A</div>
+          <div class="footer-val">
+            <div>BTTN Global</div>
+            <div>Miami, FL USA</div>
+          </div>
+        </div>
+        <div class="footer-row links">
+          <div class="footer-key">E<br>S</div>
+          <div class="footer-val">
+            <div>info@baileyttnglobal.com</div>
+            <a class="linkedin" href="#">↘ LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">© 2026 BTTN Global. All rights reserved.</div>
+    </footer>
+
+  </div>
+</div>
+</body>
+</html>
