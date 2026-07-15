@@ -41,7 +41,8 @@
     padding:22px 0 26px;
     font-size:11px;letter-spacing:0.14em;font-weight:500;text-transform:uppercase;
   }
-  .logo{letter-spacing:0.28em;font-weight:600}
+  .logo{display:inline-flex;align-items:center;letter-spacing:0.28em;font-weight:600}
+  .logo-mark{width:28px;height:28px;margin-right:11px;display:block;flex:none}
   .logo .slash{color:var(--accent)}
   .topnav{display:flex;gap:clamp(20px,4vw,44px)}
   .topnav .contact{color:var(--accent)}
@@ -96,7 +97,7 @@
 
   <!-- top bar -->
   <div class="topbar">
-    <a class="logo" href="/">bttn global&nbsp;<span class="slash">/</span></a>
+    <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="BTTN Global logo" width="28" height="28">bttn global&nbsp;<span class="slash">/</span></a>
     <nav class="topnav">
       <a href="/#menu">Updates</a>
       <a class="contact" href="/#footer">Contact</a>
