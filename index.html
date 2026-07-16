@@ -112,16 +112,12 @@
   .list-head h2{margin:0;font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-0.02em}
   .list-head .count{font-size:12px;color:var(--muted);font-weight:500}
   .product{
-    display:grid;grid-template-columns:64px 1fr;gap:clamp(16px,4vw,56px);
-    padding:26px 0;border-top:1px solid var(--hair);
+    display:grid;grid-template-columns:64px 1fr auto;gap:clamp(16px,4vw,56px);
+    align-items:baseline;padding:26px 0;border-top:1px solid var(--hair);
   }
   .product .year{
     font-size:11px;letter-spacing:0.04em;color:var(--muted);
-    padding-top:5px;font-variant-numeric:tabular-nums;
-  }
-  .product .body{
-    display:flex;flex-wrap:wrap;gap:10px 40px;
-    justify-content:space-between;align-items:baseline;
+    font-variant-numeric:tabular-nums;
   }
   .product .info{max-width:520px}
   .product .name-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
@@ -187,6 +183,71 @@
   .legal-links{margin-top:14px;display:flex;gap:24px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500}
   .legal-links a{color:var(--muted)}
   .legal-links a:hover{color:var(--accent)}
+
+  /* ===== mobile design (phones) ===== */
+  @media(max-width:559px){
+    /* top bar */
+    .topbar{padding:16px 0 20px;font-size:10px}
+    .logo{letter-spacing:0.24em}
+    .logo-mark{width:24px;height:24px;margin-right:9px}
+    .topnav{gap:18px}
+
+    /* hero */
+    .hero{padding-top:56px}
+    .hero h1{font-size:88px}
+    .hero .rule{margin:14px 0 10px}
+    .hero .sub{font-size:19px}
+    .hero .est{margin-top:18px;max-width:240px}
+
+    /* mission — stacked, left aligned */
+    .mission{flex-direction:column;gap:20px;padding-top:80px}
+    .mission p{text-align:left;max-width:none;font-size:15px}
+
+    /* process — vertical with downward arrows */
+    .process{padding:90px 0 80px}
+    .process .label{margin-bottom:36px}
+    .proc{row-gap:0}
+    .proc-step{display:grid;grid-template-columns:36px 1fr;column-gap:16px;padding-bottom:0}
+    .proc-num{grid-column:1;grid-row:1;padding-top:3px}
+    .proc-content{grid-column:2;grid-row:1}
+    .proc-step .rule{margin:0 0 14px}
+    .proc-title{font-size:19px}
+    .proc-desc{margin-top:10px}
+    .proc-step:not(:last-child)::after{
+      content:"↓";grid-column:2;grid-row:2;
+      padding:20px 0;font-size:20px;line-height:1;color:var(--accent);
+    }
+
+    /* products — stacked cards */
+    .product{
+      grid-template-columns:1fr auto;
+      grid-template-areas:"year visit" "info info";
+      column-gap:12px;row-gap:8px;
+    }
+    .product .year{grid-area:year}
+    .product .info{grid-area:info;max-width:none}
+    .product .visit{grid-area:visit;justify-self:end}
+    .product .name{font-size:19px}
+    .product .desc{font-size:13px}
+    .badge{font-size:9px}
+
+    /* updates — date + tag row, then text */
+    .updates{padding-top:70px}
+    .update{
+      grid-template-columns:auto auto 1fr;
+      grid-template-areas:"date tag ." "text text text";
+      column-gap:12px;row-gap:8px;align-items:baseline;
+    }
+    .update .date{grid-area:date;padding-top:0}
+    .update .tag{grid-area:tag}
+    .update .text-wrap{grid-area:text;max-width:none}
+    .update .text{font-size:14px}
+
+    /* footer */
+    .footer-row{grid-template-columns:28px 1fr;gap:18px}
+    .footer-val{font-size:14px}
+    .copyright{margin-top:36px}
+  }
 </style>
 </head>
 <body>
@@ -223,30 +284,38 @@
       <div class="proc">
         <div class="proc-step">
           <div class="proc-num">01</div>
-          <div class="rule"></div>
-          <div class="proc-arrow">→</div>
-          <div class="proc-title">Spot the gap</div>
-          <div class="proc-desc">We study what is already on the market and either improve it or dream up new tools where we see gaps.</div>
+          <div class="proc-content">
+            <div class="rule"></div>
+            <div class="proc-arrow">→</div>
+            <div class="proc-title">Spot the gap</div>
+            <div class="proc-desc">We study what is already on the market and either improve it or dream up new tools where we see gaps.</div>
+          </div>
         </div>
         <div class="proc-step">
           <div class="proc-num">02</div>
-          <div class="rule"></div>
-          <div class="proc-arrow">→</div>
-          <div class="proc-title">Ship fast</div>
-          <div class="proc-desc">We bring products to market as quickly as possible, getting something real into people’s hands early.</div>
+          <div class="proc-content">
+            <div class="rule"></div>
+            <div class="proc-arrow">→</div>
+            <div class="proc-title">Ship fast</div>
+            <div class="proc-desc">We bring products to market as quickly as possible, getting something real into people’s hands early.</div>
+          </div>
         </div>
         <div class="proc-step">
           <div class="proc-num">03</div>
-          <div class="rule"></div>
-          <div class="proc-arrow">→</div>
-          <div class="proc-title">Build in beta</div>
-          <div class="proc-desc">We work closely with customers and community through beta to shape the product together.</div>
+          <div class="proc-content">
+            <div class="rule"></div>
+            <div class="proc-arrow">→</div>
+            <div class="proc-title">Build in beta</div>
+            <div class="proc-desc">We work closely with customers and community through beta to shape the product together.</div>
+          </div>
         </div>
         <div class="proc-step">
           <div class="proc-num">04</div>
-          <div class="rule"></div>
-          <div class="proc-title">Keep improving</div>
-          <div class="proc-desc">We improve consistently and deliberately, driven by ongoing feedback from real usage.</div>
+          <div class="proc-content">
+            <div class="rule"></div>
+            <div class="proc-title">Keep improving</div>
+            <div class="proc-desc">We improve consistently and deliberately, driven by ongoing feedback from real usage.</div>
+          </div>
         </div>
       </div>
     </section>
@@ -259,42 +328,36 @@
       </div>
       <div class="product">
         <div class="year">2026</div>
-        <div class="body">
-          <div class="info">
-            <div class="name-row">
-              <div class="name">Salmon App</div>
-              <span class="badge"><span class="dot dot-beta"></span>Beta</span>
-            </div>
-            <div class="desc">Turns your meetings and notes into tracked work and shows managers exactly what to move today, across every project.</div>
+        <div class="info">
+          <div class="name-row">
+            <div class="name">Salmon App</div>
+            <span class="badge"><span class="dot dot-beta"></span>Beta</span>
           </div>
-          <a class="visit" href="https://project-salmon.com" target="_blank" rel="noopener">Visit ↗</a>
+          <div class="desc">Turns your meetings and notes into tracked work and shows managers exactly what to move today, across every project.</div>
         </div>
+        <a class="visit" href="https://project-salmon.com" target="_blank" rel="noopener">Visit ↗</a>
       </div>
       <div class="product">
         <div class="year">2026</div>
-        <div class="body">
-          <div class="info">
-            <div class="name-row">
-              <div class="name">Stampish</div>
-              <span class="badge"><span class="dot dot-beta"></span>Beta</span>
-            </div>
-            <div class="desc">Custom digital stamp card that lives in your Apple Wallet.</div>
+        <div class="info">
+          <div class="name-row">
+            <div class="name">Stampish</div>
+            <span class="badge"><span class="dot dot-beta"></span>Beta</span>
           </div>
-          <a class="visit" href="https://app.getstampish.com" target="_blank" rel="noopener">Visit ↗</a>
+          <div class="desc">Custom digital stamp card that lives in your Apple Wallet.</div>
         </div>
+        <a class="visit" href="https://app.getstampish.com" target="_blank" rel="noopener">Visit ↗</a>
       </div>
       <div class="product">
         <div class="year">2026</div>
-        <div class="body">
-          <div class="info">
-            <div class="name-row">
-              <div class="name">Product Three</div>
-              <span class="badge"><span class="dot dot-build"></span>Build</span>
-            </div>
-            <div class="desc">Placeholder description of the newest product in the portfolio.</div>
+        <div class="info">
+          <div class="name-row">
+            <div class="name">Product Three</div>
+            <span class="badge"><span class="dot dot-build"></span>Build</span>
           </div>
-          <a class="visit" href="#">Visit ↗</a>
+          <div class="desc">Placeholder description of the newest product in the portfolio.</div>
         </div>
+        <a class="visit" href="#">Visit ↗</a>
       </div>
     </section>
 
