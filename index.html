@@ -26,10 +26,26 @@
     color:var(--ink);
     font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-wrap:pretty;
   }
-  a{color:inherit;text-decoration:none}
+  a{color:inherit;text-decoration:none;transition:color 150ms ease-out}
   a:hover{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
   ::selection{background:var(--accent);color:#fff}
+
+  /* polish: balance short headings/titles across lines */
+  h1,h2,.hero .sub,.proc-title,.product .name,.update .text{text-wrap:balance}
+
+  /* polish: subtle scroll-reveal (only when JS is on; respects reduced-motion) */
+  .js [data-reveal]{
+    opacity:0;transform:translateY(8px);filter:blur(3px);
+    transition:opacity .55s ease-out, transform .55s ease-out, filter .55s ease-out;
+    transition-delay:calc(var(--i,0) * 80ms);
+  }
+  .js [data-reveal].in{opacity:1;transform:none;filter:none}
+  @media (prefers-reduced-motion:reduce){
+    .js [data-reveal]{opacity:1;transform:none;filter:none;transition:none}
+  }
 
   .page{min-height:100vh;padding:0 clamp(20px,5vw,64px)}
   .shell{max-width:1080px;margin:0 auto}
@@ -265,7 +281,7 @@
   <div id="top" class="shell">
 
     <!-- hero -->
-    <section class="hero">
+    <section class="hero" data-reveal>
       <h1>build</h1>
       <div class="rule"></div>
       <p class="sub">software that outlasts the trend.</p>
@@ -273,16 +289,16 @@
     </section>
 
     <!-- mission -->
-    <section class="mission">
+    <section class="mission" data-reveal>
       <div class="label">Mission</div>
       <p>BTTN Global builds SaaS products from the ground up. We make tools that free teams from busywork and give small companies the leverage of large ones. We ship quietly, iterate in the open, and measure success by the problems our software makes disappear.</p>
     </section>
 
     <!-- process -->
     <section class="process">
-      <div class="label">How we work</div>
+      <div class="label" data-reveal>How we work</div>
       <div class="proc">
-        <div class="proc-step">
+        <div class="proc-step" data-reveal style="--i:0">
           <div class="proc-num">01</div>
           <div class="proc-content">
             <div class="rule"></div>
@@ -291,7 +307,7 @@
             <div class="proc-desc">We study what is already on the market and either improve it or dream up new tools where we see gaps.</div>
           </div>
         </div>
-        <div class="proc-step">
+        <div class="proc-step" data-reveal style="--i:1">
           <div class="proc-num">02</div>
           <div class="proc-content">
             <div class="rule"></div>
@@ -300,7 +316,7 @@
             <div class="proc-desc">We bring products to market as quickly as possible, getting something real into people’s hands early.</div>
           </div>
         </div>
-        <div class="proc-step">
+        <div class="proc-step" data-reveal style="--i:2">
           <div class="proc-num">03</div>
           <div class="proc-content">
             <div class="rule"></div>
@@ -309,7 +325,7 @@
             <div class="proc-desc">We work closely with customers and community through beta to shape the product together.</div>
           </div>
         </div>
-        <div class="proc-step">
+        <div class="proc-step" data-reveal style="--i:3">
           <div class="proc-num">04</div>
           <div class="proc-content">
             <div class="rule"></div>
@@ -322,11 +338,11 @@
 
     <!-- products -->
     <section>
-      <div class="list-head">
+      <div class="list-head" data-reveal>
         <h2>Products</h2>
         <span class="count">(3)</span>
       </div>
-      <div class="product">
+      <div class="product" data-reveal style="--i:0">
         <div class="year">2026</div>
         <div class="info">
           <div class="name-row">
@@ -337,7 +353,7 @@
         </div>
         <a class="visit" href="https://project-salmon.com" target="_blank" rel="noopener">Visit ↗</a>
       </div>
-      <div class="product">
+      <div class="product" data-reveal style="--i:1">
         <div class="year">2026</div>
         <div class="info">
           <div class="name-row">
@@ -348,7 +364,7 @@
         </div>
         <a class="visit" href="https://app.getstampish.com" target="_blank" rel="noopener">Visit ↗</a>
       </div>
-      <div class="product">
+      <div class="product" data-reveal style="--i:2">
         <div class="year">2026</div>
         <div class="info">
           <div class="name-row">
@@ -363,8 +379,8 @@
 
     <!-- updates -->
     <section id="menu" class="updates">
-      <h2>Updates</h2>
-      <div class="update">
+      <h2 data-reveal>Updates</h2>
+      <div class="update" data-reveal style="--i:0">
         <div class="tag">New</div>
         <div class="date">2026.07</div>
         <div class="text-wrap">
@@ -372,7 +388,7 @@
           <a class="details" href="https://project-salmon.com" target="_blank" rel="noopener">See details ↗</a>
         </div>
       </div>
-      <div class="update">
+      <div class="update" data-reveal style="--i:1">
         <div class="tag"></div>
         <div class="date">2026.07</div>
         <div class="text-wrap">
@@ -385,7 +401,7 @@
     <!-- footer -->
     <footer id="footer">
       <a class="to-top" href="#top">↑</a>
-      <div class="footer-rows">
+      <div class="footer-rows" data-reveal>
         <div class="footer-row">
           <div class="footer-key">A</div>
           <div class="footer-val">
@@ -410,5 +426,35 @@
 
   </div>
 </div>
+<script>
+  document.documentElement.classList.add('js');
+  (function(){
+    var els = [].slice.call(document.querySelectorAll('[data-reveal]'));
+    function show(el){ el.classList.add('in'); }
+    function drop(el){ var i = els.indexOf(el); if(i>-1) els.splice(i,1); }
+    function revealInView(){
+      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+      if(!vh) return;
+      els.slice().forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if(r.top < vh * 0.95 && r.bottom > 0){ show(el); drop(el); }
+      });
+    }
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ show(e.target); io.unobserve(e.target); drop(e.target); } });
+      }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+      els.slice().forEach(function(el){ io.observe(el); });
+    }
+    var ticking = false;
+    function onScroll(){ if(ticking) return; ticking = true; requestAnimationFrame(function(){ revealInView(); ticking = false; }); }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll, {passive:true});
+    window.addEventListener('load', revealInView);
+    revealInView();
+    /* ultimate safety: never leave content hidden */
+    setTimeout(function(){ els.slice().forEach(function(el){ show(el); drop(el); }); }, 4000);
+  })();
+</script>
 </body>
 </html>
